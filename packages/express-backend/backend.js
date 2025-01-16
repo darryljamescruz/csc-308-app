@@ -29,6 +29,11 @@ const users = {
         id: "zap555",
         name: "Dennis",
         job: "Bartender"
+      },
+      {
+        "id": "qwe123",
+        "name": "Cindy",
+        "job": "Zookeper"
       }
     ]
 };
@@ -41,11 +46,22 @@ const findUserByName = (name) => {
     );
   };
   
+const addUser = (user) => {
+  users["users_list"].push(user);
+  console.log
+  return user;
+}
+
 app.use(express.json());
 
+app.post("/users", (req, res) => {
+  const userToAdd = req.body;
+  addUser(userToAdd);
+  res.send();
+});
+
 app.get("/", (req, res) => {
-    res.send("Hello World!");
-  });
+res.send("Hello World!"); });
 
 app.get("/users", (req, res) => {
     const name = req.query.name;
