@@ -70,9 +70,15 @@ const findUserByNameAndJob = (name, job) => {
     }
   );
 };
-  
+
+// id generator function
+const generateID = () => {
+	return Math.random().toString(36).substr(2, 9);
+}
+
 //add a user
 const addUser = (user) => {
+  user.id = generateID();	// generate a random id before adding a user
   users["users_list"].push(user);
   console.log
   return user;
@@ -97,8 +103,8 @@ app.use(express.json());
 //post method to add a user
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
-  addUser(userToAdd);
-  res.status(201).send();
+  const addedUser = addUser(userToAdd);	
+  res.status(201).send(addedUser);	// send 201 status code for successful user addition
 });
 
 //delete user by ID
