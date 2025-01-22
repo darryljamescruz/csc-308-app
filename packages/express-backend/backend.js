@@ -1,6 +1,5 @@
 // backend.js
 
-//TODO: Second, implement an additional action to get all users that match a given name and a given job. Hint: look at what we did in step 4 and extend it.
 
 
 import express from 'express';
@@ -34,6 +33,16 @@ const users = {
         name: "Dennis",
         job: "Bartender"
       },
+			{
+        id: "lol123",
+        name: "Daniel",
+        job: "Bartender"
+      },
+			{
+        id: "lol321",
+        name: "Daniel",
+        job: "Bartender"
+      },
       {
         "id": "qwe123",
         "name": "Cindy",
@@ -45,12 +54,21 @@ const users = {
 //find user by id
 const findUserByID = (id) => users["users_list"].find((user) => user["id"] === id);
 
-//find user by name
-const findUserByName = (name) => {
-    return users["users_list"].filter(
-      (user) => user["name"] === name
-    );
-  };
+//find user by name and job
+const findUserByNameAndJob = (name, job) => {
+  return users["users_list"].filter(
+    (user) => {
+      if (name && job) {
+        return user["name"] === name && user["job"] === job;
+      } else if (name) {
+        return user["name"] === name;
+      } else if (job) {
+        return user["job"] === job;
+      }
+      return true;
+    }
+  );
+};
   
 //add a user
 const addUser = (user) => {
@@ -93,15 +111,12 @@ app.get("/", (req, res) => {
 
 //get all users
 app.get("/users", (req, res) => {
-    const name = req.query.name;
-    if (name != undefined) {
-      let result = findUserByName(name);
-      result = { users_list: result };
-      res.send(result);
-    } else {
-      res.send(users);
-    }
-  });
+  const name = req.query.name;
+  const job = req.query.job;
+  let result = findUserByNameAndJob(name, job);
+  result = { users_list: result };
+  res.send(result);
+});
 
 //get user by id  
 app.get("/users/:id", (req,res) => {
