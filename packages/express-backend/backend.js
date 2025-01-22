@@ -3,6 +3,7 @@
 
 
 import express from 'express';
+import cors from 'cors';
 const app = express();
 const port = 8000;
 
@@ -88,6 +89,8 @@ const deleteUser = (id) => {
   return null;
 }
 
+//allows backend to respond to requests from frontend
+app.use(cors());
 //needs to be at top
 app.use(express.json());
 
