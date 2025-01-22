@@ -21,10 +21,6 @@ function MyApp() {
         setCharacters(updated);
     }
 
-    function updateList(person) {
-        setCharacters([...characters, person]);   
-    }
-
     function fetchUsers() {
         const promise = fetch("http://localhost:8000/users");
         return promise;
@@ -41,14 +37,19 @@ function MyApp() {
         return promise;
     }
 
+    // updateList function redefined to include posting logic
     function updateList(person) {
         postUser(person)
             .then((response) => {
                 if (response.status === 201) {
-                    setCharacters([...characters, person]);
+                    return response.json();
                 } else {
                     console.log("Failed to add user");
+                    throw new Error("Failed to add user");
                 }
+            })
+            .then((newUser) => {
+                setCharacters([...characters, newUser]);
             })
             .catch((error) => {
                 console.log(error);
