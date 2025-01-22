@@ -110,8 +110,12 @@ app.post("/users", (req, res) => {
 //delete user by ID
 app.delete('/users/:id' , (req, res) => {
   const userIdToDelete = req.params.id;
-  deleteUser(userIdToDelete);
-  res.send();
+  const deletedUser = deleteUser(userIdToDelete);
+  if (deletedUser) {
+    res.status(204).send(); // send 204 status code for successful deletion
+  } else {
+    res.status(404).send("Resource not found."); // send 404 status code if user not found
+  }
 });
 
 //send 'hello world' to the root URL
