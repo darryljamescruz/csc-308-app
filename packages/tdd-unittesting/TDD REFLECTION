@@ -1,0 +1,7 @@
+TDD Reflection
+
+I was able to follow the test-first approach without going over the red-green-refactor cycle for the majority of writing the code. Using TDD did actually help make sure that the bare minimum of what was being asked for was being tested and implemented, and working incrementally helped a lot compared to writing the code all in one sitting.
+
+Working on specific goals, expecting what type of method should be called and what value should be returned helped make sure that the code writing was done on track and that anything extra was not added.
+
+Overall: I definitely do want to use TDD when working on the projects for this class, as it ensures that the software has "checkpoints" that we can test and implement and helps focus the project on being concise/no extra code being added. However, you dpo have to think a lot about the functionality beforehand, being explicit with what you clearly want out of a feature. It does ensure though testing is thorough, and that code creation is structured wel..
