@@ -37,5 +37,33 @@ describe('Stock Portfolio', () => {
         portfolio.addStock('GOOG', 50); // buy stocks from google
 
         expect(portfolio.getStockCount()).toBe(2);  // two unique stocks should be in the portfolio
+        
+        portfolio.sellStock('APPL', 15);
+        expect(portfolio.getStockCount()).toBe(1);  // one stock should be in the portfolio
+    })
+
+    test('2.6 Portfolio needs to keep only shared symbols. There should be no stocks with zero shares in the portfolio', () => {
+        const portfolio = new StockPortfolio();
+        portfolio.addStock('AAPL', 10);
+        portfolio.addStock('TSLA', 20);
+        portfolio.sellStock('AAPL', 10); // Sell all AAPL shares
+
+        expect(portfolio.stocks.has('AAPL')).toBe(false); // AAPL should be removed
+        expect(portfolio.stocks.has('TSLA')).toBe(true);  // TSLA should still exist
+    })
+
+    test('2.7 Portfilio should answer how many shares exist for a GIVEN symbol, if DNE, then return 0', () => {
+        const portfolio = new StockPortfolio();
+        portfolio.addStock('GOOG', 100);
+        expect(portfolio.getShares('GOOG')).toBe(100);  // validate that portfolio has 100 shares for GOOG
+        expect(portfolio.getShares('APPL')).toBe(0);    // no APPL stocks were purchased, should return 0
+    })
+
+    test('2.8 Portfolio should not be be able to sell more shares than are owned', () => {
+        const portfolio = new StockPortfolio();
+        portfolio.addStock('TSLA', 100);
+
+        expect(() => portfolio.sellStock('TSLA', 1000)).toThrow("Not possible to sell this number of shares.")
     })
 });
+

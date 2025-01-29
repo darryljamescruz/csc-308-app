@@ -17,8 +17,11 @@ class StockPortfolio {
         if (!Number.isInteger(shares) || shares <= 0) throw new Error('Shares must be a positive integer'); // validate # of sdhares
 
         let currentShares = this.stocks.get(symbol);    // get the current shares for the stock requested
-        let remainingShares = currentShares - shares;
+        if (shares > currentShares) {
+            throw new Error('Not possible to sell this number of shares.')  // prevent overselling
+        }
 
+        let remainingShares = currentShares - shares;
         if (remainingShares > 0) {
             this.stocks.set(symbol, remainingShares);
         } else {
@@ -28,6 +31,10 @@ class StockPortfolio {
 
     getStockCount() {
         return this.stocks.size;
+    }
+    
+    getShares(symbol) {
+        return this.stocks.get(symbol) || 0;    // return shares for symbol, return 0 if DNE
     }
 }
 
