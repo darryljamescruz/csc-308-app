@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npm -w jest-unittest run test",
+    "test": "npm -w tdd-unittesting run test",
     "dev": "npm -w react-frontend run dev"
   },
   "author": "",
