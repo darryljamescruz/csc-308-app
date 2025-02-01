@@ -8,7 +8,7 @@ const app = express();
 const port = 8000;
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/mydatabase", {
+mongoose.connect("mongodb://127.0.0.1:27017/users", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
