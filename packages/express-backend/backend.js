@@ -1,99 +1,15 @@
 // backend.js
-
-
-
 import express from 'express';
+import mongoose from 'mongoose';
 import cors from 'cors';
+import { findUsers, findUserByID, addUser, deleteUser } from './user-services.js';
+
 const app = express();
 const port = 8000;
 
-const users = {
-    users_list: [
-      {
-        id: "xyz789",
-        name: "Charlie",
-        job: "Janitor"
-      },
-      {
-        id: "abc123",
-        name: "Mac",
-        job: "Bouncer"
-      },
-      {
-        id: "ppp222",
-        name: "Mac",
-        job: "Professor"
-      },
-      {
-        id: "yat999",
-        name: "Dee",
-        job: "Aspiring actress"
-      },
-      {
-        id: "zap555",
-        name: "Dennis",
-        job: "Bartender"
-      },
-			{
-        id: "lol123",
-        name: "Daniel",
-        job: "Bartender"
-      },
-			{
-        id: "lol321",
-        name: "Daniel",
-        job: "Bartender"
-      },
-      {
-        "id": "qwe123",
-        "name": "Cindy",
-        "job": "Zookeper"
-      }
-    ]
-};
 
-//find user by id
-const findUserByID = (id) => users["users_list"].find((user) => user["id"] === id);
+mong
 
-//find user by name and job
-const findUserByNameAndJob = (name, job) => {
-  return users["users_list"].filter(
-    (user) => {
-      if (name && job) {
-        return user["name"] === name && user["job"] === job;
-      } else if (name) {
-        return user["name"] === name;
-      } else if (job) {
-        return user["job"] === job;
-      }
-      return true;
-    }
-  );
-};
-
-// id generator function
-const generateID = () => {
-	return Math.random().toString(36).substr(2, 9);
-}
-
-//add a user
-const addUser = (user) => {
-  user.id = generateID();	// generate a random id before adding a user
-  users["users_list"].push(user);
-  console.log
-  return user;
-}
-
-//delete a user by their ID
-const deleteUser = (id) => {
-  const index = users["users_list"].findIndex((user) => user.id === id);
-  if (index !== -1) {
-    const deletedUser = users["users_list"].splice(index, 1)[0];
-    console.log("User deleted");
-    return deletedUser;
-  }
-  return null;
-}
 
 //allows backend to respond to requests from frontend
 app.use(cors());
