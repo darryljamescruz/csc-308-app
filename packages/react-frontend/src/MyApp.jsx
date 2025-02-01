@@ -16,7 +16,7 @@ function MyApp() {
 
     function removeOneCharacter(index) {
         const characterToRemove = characters[index];
-        deleteUser(characterToRemove.id)
+        deleteUser(characterToRemove._id)   // updated to ._id for mongodb functionality
             .then((response) => {
                 if (response.status === 204) {
                     const updated = characters.filter((character, i) => {

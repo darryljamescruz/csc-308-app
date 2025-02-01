@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon backend.js",
-    "start": "DEBUG=express:router node backend.js"
+    "start": "DEBUG=express:router node backend.js",
+    "mongo:start": "mongod --dbpath ./data/db",
+    "mongo:stop": "mongo --eval 'db.getSiblingDB(\"admin\").shutdownServer()'"
   },
   "author": "",
   "license": "ISC",

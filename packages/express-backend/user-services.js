@@ -1,5 +1,6 @@
 // service layer
 import User from "./user.js";   // import mongoose model
+import mongoose from "mongoose";
 
 // fetch all users by name and job, if only one is provided, filter by that  
 export const findUsers = async (name, job) => {
@@ -27,5 +28,5 @@ export const addUser = async (userData) => {
 
 // delete a user from the database  
 export const deleteUser = async (id) => {
-    return User.findByIdAndDelete(id);  // removes user from DB
+    return User.findByIdAndDelete(id);
 }
